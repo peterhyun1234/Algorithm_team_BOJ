@@ -65,7 +65,7 @@ int main() {
     cin >> input_line;
     int linelen = input_line.size();
 
-    for (int i = 0; i < linelen; ++i) {
+    for (int i = 0; i < linelen; i++) {
         char c = input_line[i];
  
         if (c == 'H') {
