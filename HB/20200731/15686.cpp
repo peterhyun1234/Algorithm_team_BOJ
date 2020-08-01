@@ -19,7 +19,7 @@ vector<vector<int>> city(50, vector<int>(50));
 vector<pair<int, int>> houses, chicken_houses;
 vector<bool> path(13);
 
-void dfs(int idx_ CH, int selected_CH)
+void dfs(int idx_CH, int selected_CH)
 {
     if (selected_CH == m)
     {
@@ -37,16 +37,16 @@ void dfs(int idx_ CH, int selected_CH)
         return;
     }
 
-    if (idx_ CH == chicken_houses.size())
+    if (idx_CH == chicken_houses.size())
         return;
 
 
     // 추가하거나 안하거나
-    path[idx_ CH] = true;
-    dfs(idx_ CH + 1, selected_CH + 1);
+    path[idx_CH] = true;
+    dfs(idx_CH + 1, selected_CH + 1);
 
-    path[idx_ CH] = false;
-    dfs(idx_ CH + 1, selected_CH);
+    path[idx_CH] = false;
+    dfs(idx_CH + 1, selected_CH);
 }
  
 int main(void)
