@@ -61,21 +61,6 @@ void bfs(int r, int c) {
     max_area = max(max_area, curr_area);
 }
 
-void getMaxArea(int x, int y) {
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
-
-        if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
-
-        // 해당 방향에 벽이 존재하고 방번호가 다르다면
-        if ((map[x][y] & (1 << i)) && (path[x][y] != path[nx][ny])) {
-            int sum = path_area[path[x][y]] + path_area[path[nx][ny]];
-            max_area_wo_wall = max(max_area_wo_wall, sum);
-        }
-    }
-}
-
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0); 
@@ -109,7 +94,7 @@ int main() {
 
                 if (nx < 0 || ny < 0 || nx >= n || ny >= m) continue;
 
-                // 해당 방향에 벽이 존재하고 방번호가 다르다면
+                // 벽이 존재,  방번호가 다르면
                 if ((map[i][j] & (1 << k)) && (path[i][j] != path[nx][ny])) {
                     int sum = path_area[path[i][j]] + path_area[path[nx][ny]];
                     max_area_wo_wall = max(max_area_wo_wall, sum);
