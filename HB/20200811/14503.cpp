@@ -50,7 +50,7 @@ int main() {
         }
 
         for (int i = 0; i < 4; ++i) {
-            int next_r = r + dr[d]; 
+            int next_r = r + dr[d];
             int next_c = c + dc[d];
             int next_d = (d + 3) % 4;
 
