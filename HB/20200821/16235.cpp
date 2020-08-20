@@ -37,14 +37,14 @@
 using namespace std;
 
 int n, m, k;
-int ground[max_int][max_int];
-int a[max_int][max_int];
-int dead[max_int][max_int];
+int a[max_int][max_int]; // 각 칸에 추가되는 양분의 양
+vector<int> tree[max_int][max_int]; // 위치에 있는 나무들
+
+int ground_food[max_int][max_int]; // 땅에 있는 양분의 양
+int dead_trees_food[max_int][max_int]; // 죽은 나무의 양분
 
 int dx[] = {0, 0, 1, -1, -1, -1, 1, 1};
 int dy[] = {-1, 1, 0, 0, -1, 1, 1, -1};
-
-vector<int> tree[max_int][max_int];
 
 int main()
 {
@@ -59,7 +59,7 @@ int main()
         for (int j = 1; j <= n; j++)
         {
             cin >> a[i][j];
-            ground[i][j] = 5;
+            ground_food[i][j] = 5;
         }
     }
     int x, y, z;
@@ -72,16 +72,15 @@ int main()
         alive_trees++;
     }
 
-    for (int year = 1; year <= k; year++)
+    for (int t = 1; t <= k; t++)
     {
-
         for (int i = 1; i <= n; i++)
         {
             for (int j = 1; j <= n; j++)
             {
-                sort(tree[i][j].begin(), tree[i][j].end());
-                ground[i][j] += dead[i][j];
-                dead[i][j] = 0;
+                sort(tree[i][j].begin(), tree[i][j].end()); // 나이가 어린 나무부터
+                ground_food[i][j] += dead_trees_food[i][j];
+                dead_trees_food[i][j] = 0;
             }
         }
 
@@ -92,19 +91,17 @@ int main()
             {
                 for (int k = 0; k < tree[i][j].size(); k++)
                 {
-                    if (ground[i][j] >= tree[i][j][k])
+                    if (ground_food[i][j] >= tree[i][j][k])
                     {
-                        ground[i][j] -= tree[i][j][k];
+                        ground_food[i][j] -= tree[i][j][k];
                         tree[i][j][k] += 1;
                     }
-                    else
+                    else // 죽는 나무들 ㅠㅠ
                     {
-                        int idx = k;
-                        int size = tree[i][j].size();
-
-                        for (int l = size - 1; l >= idx; l--)
-                        {
-                            dead[i][j] += (tree[i][j][l] / 2);
+                        for (int l = tree[i][j].size() - 1; l >= k; l--)
+                        {   
+                            // 각각의 죽은 나무마다 나이를 2로 나눈 값이 나무가 있던 칸에 양분으로 추가
+                            dead_trees_food[i][j] += (tree[i][j][l] / 2);
                             tree[i][j].pop_back();
                             alive_trees--;
                         }
@@ -114,7 +111,7 @@ int main()
             }
         }
 
-        // 가을
+        // 가을 (나무 번식)
         for (int i = 1; i <= n; i++)
         {
             for (int j = 1; j <= n; j++)
@@ -145,8 +142,7 @@ int main()
         {
             for (int j = 1; j <= n; j++)
             {
-                // S2D2 기계가 양분을 더해줍니다.
-                ground[i][j] += a[i][j];
+                ground_food[i][j] += a[i][j];
             }
         }
     }
