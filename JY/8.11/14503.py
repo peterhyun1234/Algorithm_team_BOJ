@@ -2,13 +2,9 @@ import sys
 input = sys.stdin.readline
 
 N, M = map(int, input().split())
-
 r, c, d1 = map(int, input().split())
-
 directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
-
 room = [list(map(int, input().split())) for _ in range(N)]
-
 cleaned = [[False]*M for _ in range(N)]
 
 stack = []
