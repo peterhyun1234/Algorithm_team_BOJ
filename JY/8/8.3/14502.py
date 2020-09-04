@@ -56,8 +56,6 @@ for i in range(len_loc-2):
                 count_li.append(find_zero(virus(temp_graph)))
                 
 
-print(virus(li))
-print(li)
 print(max(count_li))
 
 '''

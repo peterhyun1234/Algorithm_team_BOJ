@@ -20,9 +20,6 @@ for i in range(T):
             e = True
     else:
         for i in p:
-
-            
-
             if i=='R':
                 if r == True:
                     r = False
