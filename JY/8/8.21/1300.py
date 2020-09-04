@@ -3,8 +3,6 @@ k = int(input())
 start = 1
 end = N**2
 
-
-
 while start<end:
     mid = (start+end)//2
     count = 0
